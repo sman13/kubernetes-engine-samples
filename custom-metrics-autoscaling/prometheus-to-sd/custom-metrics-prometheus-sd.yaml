@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# [START all]
 apiVersion: v1
 kind: Pod
 metadata:
@@ -21,7 +23,7 @@ spec:
     - /bin/sh
     - -c
     - ./prometheus-dummy-exporter --metric-name=foo --metric-value=40 --port=8080
-    image: gcr.io/google-samples/prometheus-dummy-exporter:dev
+    image: gcr.io/google-samples/prometheus-dummy-exporter:latest
     imagePullPolicy: Always
     name: prometheus-dummy-exporter
     resources:
@@ -45,3 +47,4 @@ spec:
       valueFrom:
         fieldRef:
           fieldPath: metadata.namespace
+# [END all]

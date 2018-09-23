@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# [START all]
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -29,11 +31,9 @@ spec:
         run: custom-metric-sd
     spec:
       containers:
-      - command:
-        - /bin/sh
-        - -c
-        - ./direct-to-sd --metric-name=foo --metric-value=40 --pod-id=$(POD_ID)
-        image: gcr.io/google-samples/sd-dummy-exporter:dev
+      - command: ["./direct-to-sd"]
+        args: ["--metric-name=foo", "--metric-value=40", "--pod-id=$(POD_ID)"]
+        image: gcr.io/google-samples/sd-dummy-exporter:latest
         name: sd-dummy-exporter
         resources:
           requests:
@@ -44,3 +44,4 @@ spec:
               fieldRef:
                 apiVersion: v1
                 fieldPath: metadata.uid
+# [END all]
